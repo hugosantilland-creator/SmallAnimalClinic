@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Small Animal Clinic Cancún – Cuidamos a quienes más amas</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turquoise: #2BBCB0;
+    --turquoise-light: #5DD6CC;
+    --turquoise-deep: #1A9B90;
+    --coral: #FF7B6E;
+    --coral-light: #FFB3AC;
+    --mint: #7ECEBF;
+    --white: #FFFFFF;
+    --off-white: #F7FAFA;
+    --light-grey: #EDF5F5;
+    --text-dark: #1A2E2E;
+    --text-mid: #4A6B6B;
+    --text-light: #8AABAB;
+    --shadow-soft: 0 8px 40px rgba(43,188,176,0.12);
+    --shadow-card: 0 4px 24px rgba(26,46,46,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 24px rgba(43,188,176,0.15);
+    padding: 12px 5%;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: var(--turquoise);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 16px rgba(43,188,176,0.35);
+  }
+  .nav-logo-text { line-height: 1.1; }
+  .nav-logo-text .brand { font-weight: 700; font-size: 15px; color: var(--white); letter-spacing: -0.3px; }
+  .nav-logo-text .sub { font-size: 10px; color: rgba(255,255,255,0.7); font-weight: 300; letter-spacing: 1px; text-transform: uppercase; }
+  nav.scrolled .brand { color: var(--text-dark); }
+  nav.scrolled .sub { color: var(--text-light); }
+  .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav.scrolled .nav-links a { color: var(--text-mid); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px;
+    background: var(--turquoise); border-radius: 2px;
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--coral)!important; color: white!important;
+    padding: 10px 22px; border-radius: 50px;
+    font-weight: 600; font-size: 13px;
+    box-shadow: 0 4px 16px rgba(255,123,110,0.4);
+    transition: transform 0.2s, box-shadow 0.2s!important;
+  }
+  .nav-cta::after { display: none; }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(255,123,110,0.5)!important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+  nav.scrolled .hamburger span { background: var(--text-dark); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative; height: 100vh; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0A5C58 0%, #1A9B90 40%, #2BBCB0 70%, #5DD6CC 100%);
+  }
+  .hero-bg-shapes {
+    position: absolute; inset: 0; overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .hero-shape-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #fff 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation: float1 8s ease-in-out infinite;
+  }
+  .hero-shape-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--coral) 0%, transparent 70%);
+    bottom: -100px; left: -100px;
+    animation: float2 10s ease-in-out infinite;
+  }
+  .hero-shape-3 {
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, #fff 0%, transparent 70%);
+    top: 30%; left: 15%;
+    animation: float3 6s ease-in-out infinite;
+  }
+  /* wave pattern overlay */
+  .hero-wave {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    line-height: 0;
+  }
+  .hero-wave svg { display: block; }
+  /* paws pattern */
+  .hero-paws {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cg fill='white' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3Ccircle cx='30' cy='14' r='3.5'/%3E%3Ccircle cx='10' cy='14' r='3.5'/%3E%3Ccircle cx='35' cy='22' r='3.5'/%3E%3Cellipse cx='20' cy='30' rx='8' ry='9'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  @keyframes float1 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-20px,20px);} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(20px,-15px);} }
+  @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(10px,10px) scale(1.1);} }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 0 20px;
+    max-width: 780px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 20px; border-radius: 50px;
+    color: white; font-size: 13px; font-weight: 500;
+    margin-bottom: 28px;
+    animation: fadeInDown 0.8s ease both;
+  }
+  .hero-badge .dot { width: 8px; height: 8px; background: #7FFFCA; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .hero-title {
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 800;
+    color: white;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.9s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    font-family: 'Lora', serif;
+    color: var(--coral-light);
+  }
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 44px;
+    animation: fadeInUp 0.9s 0.2s ease both;
+  }
+  .hero-buttons {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center;
+    animation: fadeInUp 0.9s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--coral);
+    color: white; padding: 16px 36px;
+    border-radius: 50px; font-size: 16px; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 30px rgba(255,123,110,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,123,110,0.6); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: white; padding: 14px 32px;
+    border-radius: 50px; font-size: 15px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute; bottom: 90px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 60px;
+    animation: fadeInUp 0.9s 0.4s ease both;
+    z-index: 2;
+  }
+  .stat { text-align: center; color: white; }
+  .stat-num { font-size: 32px; font-weight: 800; display: block; line-height: 1; }
+  .stat-label { font-size: 12px; opacity: 0.7; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ─── SECTIONS GENERAL ─── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--turquoise); margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(30px, 4vw, 50px);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -1px; color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: normal; color: var(--turquoise-deep); font-family: 'Lora', serif; }
+  .section-subtitle {
+    font-size: 17px; color: var(--text-mid);
+    line-height: 1.7; font-weight: 300;
+    max-width: 560px;
+  }
+  .section-header { margin-bottom: 64px; }
+  .center { text-align: center; }
+  .center .section-subtitle { margin: 0 auto; }
+
+  /* reveal on scroll */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity:0; transform:translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-right { opacity:0; transform:translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+  /* ─── SERVICIOS ─── */
+  #servicios { background: var(--off-white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--turquoise), var(--turquoise-deep));
+    opacity: 0; transition: opacity 0.35s;
+    border-radius: var(--radius);
+  }
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(43,188,176,0.25); }
+  .service-card:hover::before { opacity: 1; }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-icon {
+    width: 64px; height: 64px;
+    background: var(--light-grey);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    transition: background 0.35s, transform 0.35s;
+  }
+  .service-card:hover .service-icon { background: rgba(255,255,255,0.2); transform: scale(1.1) rotate(-5deg); }
+  .service-name {
+    font-size: 20px; font-weight: 700;
+    color: var(--text-dark);
+    transition: color 0.35s;
+  }
+  .service-card:hover .service-name { color: white; }
+  .service-desc {
+    font-size: 14px; color: var(--text-mid);
+    line-height: 1.7; font-weight: 400;
+    transition: color 0.35s;
+  }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.85); }
+  .service-arrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600;
+    color: var(--turquoise);
+    margin-top: auto; transition: color 0.35s, gap 0.3s;
+  }
+  .service-card:hover .service-arrow { color: rgba(255,255,255,0.9); gap: 10px; }
+
+  /* urgencias highlight */
+  .service-card.urgent {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--coral), var(--coral-light)) border-box;
+  }
+  .service-card.urgent .service-icon { background: rgba(255,123,110,0.1); }
+  .service-card.urgent::before { background: linear-gradient(135deg, var(--coral), #FF5B4C); }
+  .service-card.urgent .service-arrow { color: var(--coral); }
+  .service-card.urgent:hover .service-arrow { color: rgba(255,255,255,0.9); }
+  .service-card.urgent:hover { box-shadow: 0 20px 50px rgba(255,123,110,0.25); }
+
+  /* ─── ABOUT / NOSOTROS ─── */
+  #nosotros {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-main-img {
+    width: 100%; height: 500px;
+    background: linear-gradient(135deg, var(--turquoise-light) 0%, var(--turquoise-deep) 100%);
+    border-radius: 30px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 120px; overflow: hidden;
+    position: relative;
+  }
+  .about-main-img .img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(43,188,176,0.85), rgba(26,155,144,0.9));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; color: white;
+  }
+  .about-main-img .img-emoji { font-size: 80px; }
+  .about-main-img .img-text { font-size: 16px; font-weight: 600; opacity: 0.9; }
+  .about-float-card {
+    position: absolute;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(26,46,46,0.14);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .about-float-card.card-1 { bottom: -20px; left: -20px; }
+  .about-float-card.card-2 { top: 30px; right: -20px; }
+  .float-icon { font-size: 28px; }
+  .float-text .val { font-size: 22px; font-weight: 800; color: var(--turquoise-deep); }
+  .float-text .lbl { font-size: 11px; color: var(--text-light); font-weight: 500; }
+
+  .about-text .section-header { margin-bottom: 32px; }
+  .about-features { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+  .feature-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .feature-bullet {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--light-grey);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .feature-item:hover .feature-bullet { background: var(--turquoise); transform: rotate(-8deg); }
+  .feature-text h4 { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .feature-text p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ─── EQUIPO ─── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+  }
+  .team-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+  }
+  .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-soft); }
+  .team-photo {
+    height: 240px;
+    background: linear-gradient(135deg, var(--turquoise-light), var(--turquoise-deep));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px; position: relative; overflow: hidden;
+  }
+  .team-photo::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to top, rgba(26,46,46,0.3), transparent);
+  }
+  .team-info { padding: 24px 20px; }
+  .team-name { font-size: 17px; font-weight: 700; color: var(--text-dark); }
+  .team-role { font-size: 13px; color: var(--turquoise-deep); font-weight: 500; margin-top: 4px; }
+  .team-bio { font-size: 13px; color: var(--text-mid); margin-top: 10px; line-height: 1.6; }
+
+  /* ─── TESTIMONIOS ─── */
+  #testimonios { background: white; overflow: hidden; }
+  .testimonials-track-wrap { overflow: hidden; margin: 0 -5%; padding: 20px 5%; }
+  .testimonials-track {
+    display: flex; gap: 24px;
+    animation: scroll-left 40s linear infinite;
+    width: max-content;
+  }
+  .testimonials-track:hover { animation-play-state: paused; }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .testi-card {
+    background: var(--off-white);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    width: 340px; flex-shrink: 0;
+    border: 1.5px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .testi-card:hover { border-color: var(--turquoise-light); box-shadow: var(--shadow-soft); }
+  .testi-stars { color: #FFB800; font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testi-text { font-size: 15px; color: var(--text-mid); line-height: 1.75; font-style: italic; margin-bottom: 20px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--turquoise-light), var(--turquoise-deep));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .testi-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .testi-pet { font-size: 12px; color: var(--text-light); }
+
+  /* ─── GALERÍA ─── */
+  #galeria { background: var(--off-white); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 200px 200px;
+    gap: 16px;
+  }
+  .gallery-item {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative; cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .gallery-item:hover { transform: scale(1.02); z-index: 1; }
+  .gallery-item.span-2 { grid-column: span 2; grid-row: span 2; }
+  .gallery-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    position: relative;
+  }
+  .gallery-item:nth-child(1) .gallery-bg { background: linear-gradient(135deg, #B8EDE9, #5DD6CC); }
+  .gallery-item:nth-child(2) .gallery-bg { background: linear-gradient(135deg, #FFD6D3, #FFB3AC); }
+  .gallery-item:nth-child(3) .gallery-bg { background: linear-gradient(135deg, #C8F0EC, #7ECEBF); }
+  .gallery-item:nth-child(4) .gallery-bg { background: linear-gradient(135deg, #D6F0EE, #2BBCB0); }
+  .gallery-item:nth-child(5) .gallery-bg { background: linear-gradient(135deg, #FFE8E6, #FF7B6E); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,46,46,0.6) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 16px;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-label { color: white; font-size: 13px; font-weight: 600; }
+
+  /* ─── CONTACTO / FOOTER ─── */
+  #contacto {
+    background: var(--text-dark);
+    color: white;
+    padding: 80px 5% 0;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    padding-bottom: 64px;
+  }
+  .contact-info .section-label { color: var(--turquoise-light); }
+  .contact-info .section-title { color: white; }
+  .contact-info .section-title em { color: var(--turquoise-light); }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(43,188,176,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact-item-text h4 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .contact-item-text p, .contact-item-text a { font-size: 16px; font-weight: 500; color: white; text-decoration: none; }
+  .contact-item-text a:hover { color: var(--turquoise-light); }
+
+  .social-links { display: flex; gap: 12px; margin-top: 32px; }
+  .social-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .social-btn:hover { transform: translateY(-2px); }
+  .social-wa { background: #25D366; color: white; }
+  .social-wa:hover { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+  .social-ig { background: linear-gradient(135deg, #F77737, #E1306C, #833AB4); color: white; }
+  .social-ig:hover { box-shadow: 0 6px 20px rgba(225,48,108,0.4); }
+  .social-fb { background: #1877F2; color: white; }
+  .social-fb:hover { box-shadow: 0 6px 20px rgba(24,119,242,0.4); }
+
+  .hours-section { margin-top: 32px; }
+  .hours-title { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .hours-list { display: flex; flex-direction: column; gap: 8px; }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .hours-day { color: rgba(255,255,255,0.6); }
+  .hours-time { color: white; font-weight: 600; }
+  .hours-badge { background: var(--coral); color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+  .map-container {
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px;
+    background: rgba(255,255,255,0.05);
+    display: flex; flex-direction: column;
+  }
+  .map-placeholder {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(43,188,176,0.1), rgba(43,188,176,0.05));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; color: rgba(255,255,255,0.5);
+    border-radius: var(--radius);
+    border: 1px solid rgba(43,188,176,0.2);
+    font-size: 48px;
+    position: relative; overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(43,188,176,0.03) 0px,
+      rgba(43,188,176,0.03) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+  }
+  .map-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--turquoise-light);
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .map-sublabel {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    position: relative; z-index: 1;
+  }
+  .map-direction-btn {
+    background: var(--turquoise);
+    color: white;
+    border: none; padding: 14px;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .map-direction-btn:hover { background: var(--turquoise-deep); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: rgba(255,255,255,0.3);
+  }
+  .footer-logo-small { display: flex; align-items: center; gap: 8px; }
+  .footer-logo-small .dot2 { width: 6px; height: 6px; background: var(--turquoise); border-radius: 50%; }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 999;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  }
+  .wa-bubble {
+    background: #25D366;
+    border-radius: 50%; width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    animation: wa-pulse 3s ease-in-out infinite;
+    font-size: 28px;
+  }
+  .wa-bubble:hover { transform: scale(1.15); box-shadow: 0 12px 40px rgba(37,211,102,0.6); }
+  @keyframes wa-pulse {
+    0%,100% { box-shadow: 0 8px 30px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 30px rgba(37,211,102,0.5), 0 0 0 12px rgba(37,211,102,0); }
+  }
+  .wa-tooltip {
+    background: white;
+    color: var(--text-dark);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 13px; font-weight: 600;
+    box-shadow: 0 4px 20px rgba(26,46,46,0.15);
+    white-space: nowrap;
+    animation: fadeInRight 0.5s ease;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .wa-tooltip::after {
+    content: ''; position: absolute; right: -6px; top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent; border-left-color: white;
+  }
+  @keyframes fadeInRight { from{opacity:0;transform:translateX(10px);} to{opacity:1;transform:translateX(0);} }
+
+  /* ─── MOBILE NAV MENU ─── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,92,88,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: white; font-size: 28px; font-weight: 700;
+    text-decoration: none; text-align: center;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--turquoise-light); }
+  .mobile-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: none; color: white;
+    font-size: 32px; cursor: pointer;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    #nosotros { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+    .gallery-item.span-2 { grid-column: span 2; height: 200px; }
+    .hero-stats { gap: 30px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav.scrolled .hamburger span { background: var(--text-dark); }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5%; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.span-2 { grid-column: span 1; }
+    .hero-stats { display: none; }
+    .hero-wave svg { height: 40px; }
+    .stat-num { font-size: 24px; }
+    .about-float-card.card-2 { right: 0; }
+    .about-float-card.card-1 { left: 0; }
+    .social-links { flex-wrap: wrap; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="data:image/png;base64,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" style="width:48px;height:48px;object-fit:contain;border-radius:50%;background:white;padding:2px;" alt="SAC Logo">
+    <div class="nav-logo-text">
+      <div class="brand">Small Animal Clinic</div>
+      <div class="sub">Cancún · Veterinaria Premium</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto" class="nav-cta">📅 Agenda tu cita</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#servicios" onclick="closeMobile()">Servicios</a>
+  <a href="#nosotros" onclick="closeMobile()">Nosotros</a>
+  
+  <a href="#testimonios" onclick="closeMobile()">Reseñas</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shapes">
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+    <div class="hero-shape hero-shape-3"></div>
+  </div>
+  <div class="hero-paws"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Veterinaria Premium en Cancún &nbsp;·&nbsp; Desde 2015
+    </div>
+    <h1 class="hero-title">
+      El bienestar de tu mascota<br><em>es nuestra pasión</em>
+    </h1>
+    <p class="hero-subtitle">
+      Atención veterinaria de primer nivel con tecnología de punta,<br>
+      trato humano y el calor del Caribe.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contacto" class="btn-primary">📅 Agenda tu cita hoy</a>
+      <a href="#servicios" class="btn-secondary">Ver servicios →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">+8K</span>
+      <span class="stat-label">Pacientes atendidos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">10+</span>
+      <span class="stat-label">Años de experiencia</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">24h</span>
+      <span class="stat-label">Urgencias disponibles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4.9★</span>
+      <span class="stat-label">Calificación Google</span>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F7FAFA"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-header center reveal">
+    <p class="section-label">Lo que ofrecemos</p>
+    <h2 class="section-title">Servicios <em>especializados</em></h2>
+    <p class="section-subtitle">Cada servicio está diseñado para brindar la mejor atención médica y experiencia a tu mascota y a ti.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal" style="transition-delay:0.05s">
+      <div class="service-icon">🩺</div>
+      <div class="service-name">Consulta General</div>
+      <p class="service-desc">Revisión completa, vacunación, desparasitación y plan preventivo personalizado. Tu mascota en las mejores manos.</p>
+      <span class="service-arrow">Conocer más →</span>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-icon">🔬</div>
+      <div class="service-name">Diagnóstico & Lab</div>
+      <p class="service-desc">Laboratorio clínico, radiografía digital y ultrasonido. Resultados rápidos para decisiones oportunas.</p>
+      <span class="service-arrow">Conocer más →</span>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.15s">
+      <div class="service-icon">🏥</div>
+      <div class="service-name">Cirugía & Internamiento</div>
+      <p class="service-desc">Quirófano equipado con estándares internacionales, anestesiología segura y recuperación monitoreada.</p>
+      <span class="service-arrow">Conocer más →</span>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Estética & Grooming</div>
+      <p class="service-desc">Baño, corte, arreglo de uñas y más. Tus mascotas salen hermosas, relajadas y oliendo delicioso.</p>
+      <span class="service-arrow">Conocer más →</span>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.25s">
+      <div class="service-icon">🦷</div>
+      <div class="service-name">Odontología Veterinaria</div>
+      <p class="service-desc">Limpieza dental profesional, extracciones y prevención de enfermedades periodontales en pequeños animales.</p>
+      <span class="service-arrow">Conocer más →</span>
+    </div>
+    <div class="service-card urgent reveal" style="transition-delay:0.3s">
+      <div class="service-icon">🚨</div>
+      <div class="service-name">Urgencias 24 hrs</div>
+      <p class="service-desc">Atención de emergencias las 24 horas, los 7 días de la semana. Porque cuando más nos necesitas, estamos ahí.</p>
+      <span class="service-arrow">Llamar ahora →</span>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="about-visual reveal-left">
+    <div class="about-main-img">
+      <div class="img-overlay">
+        <img src="data:image/png;base64,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" style="width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));" alt="Small Animal Clinic Logo">
+        <p class="img-text">Instalaciones de primer nivel</p>
+      </div>
+    </div>
+    <div class="about-float-card card-1">
+      <div class="float-icon">❤️</div>
+      <div class="float-text">
+        <div class="val">+8,000</div>
+        <div class="lbl">Mascotas atendidas</div>
+      </div>
+    </div>
+    <div class="about-float-card card-2">
+      <div class="float-icon">🏆</div>
+      <div class="float-text">
+        <div class="val">Clínica #1</div>
+        <div class="lbl">Cancún 2024</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-text reveal-right">
+    <div class="section-header">
+      <p class="section-label">Quiénes somos</p>
+      <h2 class="section-title">Medicina veterinaria<br><em>con corazón caribeño</em></h2>
+      <p class="section-subtitle">Somos una clínica fundada por veterinarios apasionados que creen que cada mascota merece atención de calidad, compasiva y accesible.</p>
+    </div>
+    <div class="about-features">
+      <div class="feature-item">
+        <div class="feature-bullet">🌊</div>
+        <div class="feature-text">
+          <h4>Arraigados en Cancún</h4>
+          <p>Conocemos a nuestra comunidad. Más de 10 años sirviendo a las familias del Caribe mexicano.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-bullet">🔬</div>
+        <div class="feature-text">
+          <h4>Tecnología de vanguardia</h4>
+          <p>Equipamiento de diagnóstico moderno para ofrecer el tratamiento más preciso y oportuno.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-bullet">💚</div>
+        <div class="feature-text">
+          <h4>Trato humano y empático</h4>
+          <p>Entendemos que tu mascota es parte de tu familia. Te acompañamos en cada etapa con calidez.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-header center reveal">
+    <p class="section-label">Opiniones reales</p>
+    <h2 class="section-title">Lo que dicen<br><em>nuestras familias</em></h2>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track" id="testiTrack">
+      <!-- CARDS (duplicated for infinite scroll) -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Llevé a mi perro Coco de urgencia y el Dr. Vega lo atendió de inmediato. La atención fue increíble, rápida y sobre todo muy empática con nosotros como familia. ¡100% recomendados!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐕</div>
+          <div><div class="testi-name">María González</div><div class="testi-pet">Coco · Labrador 4 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Mi gata Luna fue operada aquí y quedé sin palabras. Las instalaciones son impecables y el seguimiento post-operatorio fue perfecto. Me explicaron todo con claridad y paciencia."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐱</div>
+          <div><div class="testi-name">Roberto Hernández</div><div class="testi-pet">Luna · Persa 2 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"La Dra. Sofía es la mejor. Detectó un problema en mi Chihuahua que otros veterinarios habían pasado por alto. Definitivamente la clínica más profesional de Cancún."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐩</div>
+          <div><div class="testi-name">Ana Ramírez</div><div class="testi-pet">Tofu · Chihuahua 6 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"El servicio de estética dejó a mi Bichon Frisé hermoso. Se nota que aman a los animales, porque mi perrita salió tranquila y feliz. ¡Ya tenemos clínica fija!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐶</div>
+          <div><div class="testi-name">Paola Sánchez</div><div class="testi-pet">Nube · Bichon 3 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Venimos de Puerto Morelos específicamente a esta clínica. Vale totalmente el viaje. Atención impecable, precios justos y sobre todo un equipo que realmente cuida a tu mascota."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐈</div>
+          <div><div class="testi-name">Diego Torres</div><div class="testi-pet">Mochi · Maine Coon 5 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Agendé por WhatsApp en 2 minutos y me atendieron puntual. El Dr. Reyes explicó el diagnóstico de manera muy clara. Se nota la vocación en cada persona que trabaja aquí."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐕</div>
+          <div><div class="testi-name">Claudia Morales</div><div class="testi-pet">Kenzo · Golden 7 años</div></div>
+        </div>
+      </div>
+      <!-- Duplicates for infinite scroll -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Llevé a mi perro Coco de urgencia y el Dr. Vega lo atendió de inmediato. La atención fue increíble, rápida y sobre todo muy empática con nosotros como familia. ¡100% recomendados!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐕</div>
+          <div><div class="testi-name">María González</div><div class="testi-pet">Coco · Labrador 4 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Mi gata Luna fue operada aquí y quedé sin palabras. Las instalaciones son impecables y el seguimiento post-operatorio fue perfecto. Me explicaron todo con claridad y paciencia."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐱</div>
+          <div><div class="testi-name">Roberto Hernández</div><div class="testi-pet">Luna · Persa 2 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"La Dra. Sofía es la mejor. Detectó un problema en mi Chihuahua que otros veterinarios habían pasado por alto. Definitivamente la clínica más profesional de Cancún."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐩</div>
+          <div><div class="testi-name">Ana Ramírez</div><div class="testi-pet">Tofu · Chihuahua 6 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"El servicio de estética dejó a mi Bichon Frisé hermoso. Se nota que aman a los animales, porque mi perrita salió tranquila y feliz. ¡Ya tenemos clínica fija!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐶</div>
+          <div><div class="testi-name">Paola Sánchez</div><div class="testi-pet">Nube · Bichon 3 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Venimos de Puerto Morelos específicamente a esta clínica. Vale totalmente el viaje. Atención impecable, precios justos y sobre todo un equipo que realmente cuida a tu mascota."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐈</div>
+          <div><div class="testi-name">Diego Torres</div><div class="testi-pet">Mochi · Maine Coon 5 años</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Agendé por WhatsApp en 2 minutos y me atendieron puntual. El Dr. Reyes explicó el diagnóstico de manera muy clara. Se nota la vocación en cada persona que trabaja aquí."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🐕</div>
+          <div><div class="testi-name">Claudia Morales</div><div class="testi-pet">Kenzo · Golden 7 años</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-header center reveal">
+    <p class="section-label">Nuestra clínica</p>
+    <h2 class="section-title">Un espacio <em>pensado</em> para ellos</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item span-2 reveal">
+      <div class="gallery-bg">🐕</div>
+      <div class="gallery-overlay"><span class="gallery-label">Área de consulta</span></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.1s">
+      <div class="gallery-bg">🐈</div>
+      <div class="gallery-overlay"><span class="gallery-label">Sala de espera</span></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.15s">
+      <div class="gallery-bg">🏥</div>
+      <div class="gallery-overlay"><span class="gallery-label">Quirófano</span></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.2s">
+      <div class="gallery-bg">🔬</div>
+      <div class="gallery-overlay"><span class="gallery-label">Laboratorio</span></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.25s">
+      <div class="gallery-bg">✂️</div>
+      <div class="gallery-overlay"><span class="gallery-label">Estética</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO / FOOTER -->
+<footer id="contacto">
+  <div class="contact-grid">
+    <div class="contact-info reveal-left">
+      <p class="section-label">Contáctanos</p>
+      <h2 class="section-title">¿Listo para <em>agendar</em>?</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6)">Estamos aquí para responder todas tus dudas y encontrar el mejor momento para tu mascota.</p>
+
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <h4>Dirección</h4>
+            <p>Cancún, Quintana Roo<br>México</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <h4>Teléfono</h4>
+            <a href="tel:+529981046082">+52 998 104 6082</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-item-text">
+            <h4>Email</h4>
+            <a href="mailto:info@smallanimalclinic.mx">info@smallanimalclinic.mx</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hours-section">
+        <div class="hours-title">Horarios de atención</div>
+        <div class="hours-list">
+          <div class="hours-row">
+            <span class="hours-day">Lunes – Viernes</span>
+            <span class="hours-time">8:00 – 20:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Sábados</span>
+            <span class="hours-time">9:00 – 17:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Domingos</span>
+            <span class="hours-time">10:00 – 14:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Urgencias</span>
+            <span class="hours-badge">24/7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://wa.me/529981046082" class="social-btn social-wa" target="_blank">💬 WhatsApp</a>
+        <a href="https://www.instagram.com/sac.cancun/" class="social-btn social-ig" target="_blank">📸 Instagram</a>
+        <a href="https://www.facebook.com/people/Small-Animal-Clinic-Cancun/61562957610885/?sk=about" class="social-btn social-fb" target="_blank">👍 Facebook</a>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.5!2d-86.8483052!3d21.1436315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2d8466468dad%3A0x605898a3b0c09ac4!2sSmall%20animal%20clinic%20cancun!5e0!3m2!1ses!2smx!4v1700000000000"
+          width="100%" height="100%" style="border:0;border-radius:20px 20px 0 0;min-height:340px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a href="https://www.google.com/maps/place/Small+animal+clinic+cancun/@21.1436315,-86.8483052,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2d8466468dad:0x605898a3b0c09ac4!8m2!3d21.1436315!4d-86.8483052!16s%2Fg%2F11kr_1y9_s!18m1!1e1" target="_blank" class="map-direction-btn">
+          🧭 Cómo llegar
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-logo-small">
+      <img src="data:image/png;base64,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" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:6px;" alt="logo">
+      <span>Small Animal Clinic Cancún · © 2025 · Todos los derechos reservados</span>
+    </div>
+    <span>Hecho con ❤️ en el Caribe Mexicano</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="whatsapp-float" id="waFloat">
+  <div class="wa-tooltip" id="waTooltip">¡Escríbenos ahora! 🐾</div>
+  <a href="https://wa.me/529981046082" class="wa-bubble" target="_blank" title="WhatsApp">💬</a>
+</div>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // WA tooltip auto-hide
+  const waTooltip = document.getElementById('waTooltip');
+  setTimeout(() => { waTooltip.style.opacity = '0'; waTooltip.style.transition = 'opacity 0.5s'; }, 4000);
+  document.getElementById('waFloat').addEventListener('mouseenter', () => { waTooltip.style.opacity = '1'; });
+  document.getElementById('waFloat').addEventListener('mouseleave', () => { waTooltip.style.opacity = '0'; });
+</script>
+</body>
+</html>
